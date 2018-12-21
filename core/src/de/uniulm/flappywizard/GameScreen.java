@@ -56,15 +56,22 @@ public class GameScreen implements Screen, ContactListener, InputProcessor {
 
 
 	//Settings
-	float PPM = 100;  //Pixel per Meter
+	public static final float PPM = 100;  //Pixel per Meter
 	float ABSTAND = 450 / PPM;
 
 	float SCALE_LUNA = 4f / PPM;
 	float SCALE_LUNA_BODY = 0.1f / PPM;
 	float SCALE_TURM = 0.25f / 10;
-	float SCALE_DEMENTOR = 0.15f ;
+	float SCALE_TURM_BODY = 0.01f;
+	float SCALE_DEMENTOR = 0.15f;
+	float SCALE_DEMENTOR_BODY = 0.01f;
 
-	float GESCHWINDIGKEITTURME = -30;
+	float GESCHWINDIGKEITTURME = -3;
+
+
+
+	float SPIELFELD_BREITE = 44;  // in Meter
+	float SPIELFELD_HOHE = 25;    // auch
 
 	
 	public GameScreen(FlappyWizardGame game) {
@@ -94,12 +101,12 @@ public class GameScreen implements Screen, ContactListener, InputProcessor {
 		lunaBody.setTransform(lunaSprite.getX() / PPM , lunaSprite.getY() / PPM, 0);
 
 		TupleHindernisListe.add( createTuple(ABSTAND,10));
-		TupleHindernisListe.get(0).setPosX(Gdx.graphics.getWidth()-10);
+		TupleHindernisListe.get(0).setPosX(Gdx.graphics.getWidth() / PPM);
 
 
 
 		camera = new OrthographicCamera();
-		camera.setToOrtho(false, 20 , 10);
+		camera.setToOrtho(false, SPIELFELD_BREITE , SPIELFELD_HOHE);
 		//viewport = new ExtendViewport(1280, 720, camera); // XX nicht safe ob brauche   gekoppelt mit X1
 	}	
 
@@ -313,14 +320,14 @@ public class GameScreen implements Screen, ContactListener, InputProcessor {
 		TurmSprite.setSize(TurmSprite.getWidth()*SCALE_TURM,TurmSprite.getHeight()*SCALE_TURM);
 		DementorSprite.setSize(DementorSprite.getWidth()*SCALE_DEMENTOR,DementorSprite.getHeight()*SCALE_DEMENTOR);
 
-		Body TurmBody = physicsBodies.createBody("turm_gryffindor", world, SCALE_TURM , SCALE_TURM);
-		Body DementorBody = physicsBodies.createBody("dementor", world, SCALE_DEMENTOR / PPM ,SCALE_DEMENTOR / PPM);
+		Body TurmBody = physicsBodies.createBody("turm_gryffindor", world, SCALE_TURM_BODY  , SCALE_TURM_BODY );
+		Body DementorBody = physicsBodies.createBody("dementor", world, SCALE_DEMENTOR_BODY  ,SCALE_DEMENTOR_BODY );
 
-		TurmBody.setTransform((100 + Gdx.graphics.getWidth()  - TurmSprite.getWidth()/2) / PPM , TurmHeightPoint / PPM, 0);
+		TurmBody.setTransform((100 + Gdx.graphics.getWidth()  - TurmSprite.getWidth()/2) / PPM , TurmHeightPoint / PPM , 0);
 		DementorBody.setTransform((100 + Gdx.graphics.getWidth() - DementorSprite.getWidth()/2) / PPM, (TurmHeightPoint + Abstand) / PPM, 0);
 
-		TurmSprite.setPosition(TurmBody.getPosition().x, TurmBody.getPosition().y);
-		DementorSprite.setPosition(DementorBody.getPosition().x, DementorBody.getPosition().y);
+		TurmSprite.setPosition(TurmBody.getPosition().x / PPM , TurmBody.getPosition().y / PPM);
+		DementorSprite.setPosition(DementorBody.getPosition().x / PPM, DementorBody.getPosition().y / PPM);
 
 
 		TurmBody.setLinearVelocity(-100,0);
@@ -360,7 +367,7 @@ public class GameScreen implements Screen, ContactListener, InputProcessor {
 
 	public void reloadTurme(){
 		System.out.println(TupleHindernisListe.get(letzteElement).getPosX());
-		if((Gdx.graphics.getWidth() / PPM  - TupleHindernisListe.get(letzteElement).getPosX() > 5)){
+		if((Gdx.graphics.getWidth()  - TupleHindernisListe.get(letzteElement).getPosX() * PPM > 500)){
 			letzteElement += 1;
 			TupleHindernisListe.add(createTuple(ABSTAND, 10));
 		}

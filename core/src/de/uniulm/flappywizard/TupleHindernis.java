@@ -1,13 +1,9 @@
 package de.uniulm.flappywizard;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.World;
-import com.codeandweb.physicseditor.PhysicsShapeCache;
-import org.w3c.dom.Text;
+import com.badlogic.gdx.physics.box2d.BodyDef;
 
 public class TupleHindernis {
 
@@ -36,6 +32,14 @@ public class TupleHindernis {
 
         this.SCALE = SCALE;
 
+
+
+        TurmBody.setType(BodyDef.BodyType.KinematicBody);
+        DementorBody.setType(BodyDef.BodyType.KinematicBody);
+
+        TurmBody.setAwake(true);
+        DementorBody.setAwake(true);
+
         syncronicePositionSpriteToBody();
     }
 
@@ -49,10 +53,13 @@ public class TupleHindernis {
 
 
     public void syncronicePositionSpriteToBody(){
-        TurmSprite.setPosition(TurmBody.getPosition().x,TurmBody.getPosition().y);
-        DementorSprite.setPosition(DementorBody.getPosition().x, DementorBody.getPosition().y);
+        TurmSprite.setPosition(TurmBody.getPosition().x * GameScreen.PPM,TurmBody.getPosition().y * GameScreen.PPM);
+        DementorSprite.setPosition(DementorBody.getPosition().x * GameScreen.PPM, DementorBody.getPosition().y * GameScreen.PPM);
 
         PosX = TurmBody.getPosition().x;
+
+        System.out.println("A"  + TurmSprite.getX());
+        System.out.println("B" + TurmBody.getPosition().x);
     }
 }
 
