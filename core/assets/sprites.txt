@@ -1,0 +1,54 @@
+sprites.png
+size: 3024, 2006
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+dementor
+  rotate: true
+  xy: 1, 1
+  size: 677, 1635
+  orig: 722, 1661
+  offset: 19, 18
+  index: -1
+item_blau
+  rotate: true
+  xy: 1, 680
+  size: 624, 925
+  orig: 624, 925
+  offset: 0, 0
+  index: -1
+item_gruen
+  rotate: false
+  xy: 928, 680
+  size: 624, 925
+  orig: 624, 925
+  offset: 0, 0
+  index: -1
+item_rot
+  rotate: true
+  xy: 1, 1306
+  size: 624, 925
+  orig: 624, 925
+  offset: 0, 0
+  index: -1
+item_silber
+  rotate: true
+  xy: 1554, 1381
+  size: 624, 925
+  orig: 624, 925
+  offset: 0, 0
+  index: -1
+luna
+  rotate: true
+  xy: 1638, 1
+  size: 1378, 1117
+  orig: 1378, 1198
+  offset: 0, 81
+  index: -1
+turm_gryffindor
+  rotate: false
+  xy: 2757, 1
+  size: 266, 1479
+  orig: 266, 1479
+  offset: 0, 0
+  index: -1
